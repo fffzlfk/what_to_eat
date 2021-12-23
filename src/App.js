@@ -85,7 +85,7 @@ const App = () => {
   return (
       <div className="container">
           <h1>今天吃{food}!</h1>
-          {food !== '什么' && <img alt="" src={process.env.PUBLIC_URL + `/foods/${food}.jpg`} />}
+          {food !== '什么' && !isStarted && <img alt="" src={process.env.PUBLIC_URL + `/foods/${food}.jpg`} />}
           {!isStarted && <Button variant="contained" onClick={handleClick}>开始</Button>}
       </div>
   )
