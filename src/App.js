@@ -1,6 +1,10 @@
 import { useState } from 'react';
 
 import {
+  Flex,
+  Spacer,
+  Text,
+  useColorMode,
   VStack,
   Heading,
   Button,
@@ -75,6 +79,8 @@ const App = () => {
   const [food, setFood] = useState('什么');
   const [isStarted, setIsStarted] = useState(false);
 
+  const { toggleColorMode } = useColorMode();
+
   const handleClick = async () => {
     setIsStarted(true);
     for (let _ = 0; _ < 10; _++) {
@@ -86,21 +92,29 @@ const App = () => {
   }
 
   return (
-      <VStack paddingTop='100px'>
-        <Heading padding='2'>今天吃{food}{food === '什么' ? '?' : '!'}</Heading>
-        {food !== '什么' && !isStarted && <Image
-          width="300px"
-          height="300px"
-          padding="2"
-          alt=""
-          src={process.env.PUBLIC_URL + `/foods/${food}.jpg`}
-        />}
-        {!isStarted && <Button
-          padding='2'
-          colorScheme='teal'
-          variant='solid'
-          onClick={handleClick}>开始</Button>}
-      </VStack>
+    <Flex padding='5' direction='column'>
+      <Flex paddingLeft='5' paddingRight='5'>
+        <Text
+          fontSize='3xl'
+          fontFamily='cursive'
+          fontWeight='bold'
+        >What-to-eat?</Text>
+        <Spacer />
+        <Button onClick={toggleColorMode}>切换主题</Button>
+      </Flex>
+        <VStack paddingTop='100px' spacing="5">
+          <Heading>今天吃{food}{food === '什么' ? '?' : '!'}</Heading>
+          {food !== '什么' && !isStarted && <Image
+            height="300px"
+            alt=""
+            src={process.env.PUBLIC_URL + `/foods/${food}.jpg`}
+          />}
+          {!isStarted && <Button
+            colorScheme='teal'
+            variant='solid'
+            onClick={handleClick}>开始</Button>}
+        </VStack>
+    </Flex>
   )
 }
 
