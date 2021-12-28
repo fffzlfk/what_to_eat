@@ -1,9 +1,6 @@
 import { useState } from 'react';
-import "./App.css"
 
 import {
-  Center,
-  Container,
   VStack,
   Heading,
   Button,
@@ -89,15 +86,21 @@ const App = () => {
   }
 
   return (
-    <div className="container">
-      <Container>
-        <VStack>
-          <Heading>今天吃{food}{food === '什么' ? '?' : '!'}</Heading>
-          {food !== '什么' && !isStarted && <Center><Image alt="" src={process.env.PUBLIC_URL + `/foods/${food}.jpg`} /></Center>}
-          {!isStarted && <Button colorScheme='teal' variant='solid' onClick={handleClick}>开始</Button>}
-        </VStack>
-      </Container>
-    </div>
+      <VStack paddingTop='100px'>
+        <Heading padding='2'>今天吃{food}{food === '什么' ? '?' : '!'}</Heading>
+        {food !== '什么' && !isStarted && <Image
+          width="300px"
+          height="300px"
+          padding="2"
+          alt=""
+          src={process.env.PUBLIC_URL + `/foods/${food}.jpg`}
+        />}
+        {!isStarted && <Button
+          padding='2'
+          colorScheme='teal'
+          variant='solid'
+          onClick={handleClick}>开始</Button>}
+      </VStack>
   )
 }
 
