@@ -1,8 +1,14 @@
 import { useState } from 'react';
 import "./App.css"
+
 import {
-  Button
-} from '@mui/material';
+  Center,
+  Container,
+  VStack,
+  Heading,
+  Button,
+  Image,
+} from '@chakra-ui/react'
 
 const Foods = [
   "凉皮",
@@ -73,21 +79,25 @@ const App = () => {
   const [isStarted, setIsStarted] = useState(false);
 
   const handleClick = async () => {
-      setIsStarted(true);
-      for (let _ = 0; _ < 10; _++) {
-          await new Promise(r => setTimeout(r, 200));
-          const idx = getRandomInt(0, Foods.length);
-          setFood(Foods[idx]);
-      }
-      setIsStarted(false);
+    setIsStarted(true);
+    for (let _ = 0; _ < 10; _++) {
+      await new Promise(r => setTimeout(r, 200));
+      const idx = getRandomInt(0, Foods.length);
+      setFood(Foods[idx]);
+    }
+    setIsStarted(false);
   }
 
   return (
-      <div className="container">
-          <h1>今天吃{food}!</h1>
-          {food !== '什么' && !isStarted && <img alt="" src={process.env.PUBLIC_URL + `/foods/${food}.jpg`} />}
-          {!isStarted && <Button variant="contained" onClick={handleClick}>开始</Button>}
-      </div>
+    <div className="container">
+      <Container>
+        <VStack>
+          <Heading>今天吃{food}{food === '什么' ? '?' : '!'}</Heading>
+          {food !== '什么' && !isStarted && <Center><Image alt="" src={process.env.PUBLIC_URL + `/foods/${food}.jpg`} /></Center>}
+          {!isStarted && <Button colorScheme='teal' variant='solid' onClick={handleClick}>开始</Button>}
+        </VStack>
+      </Container>
+    </div>
   )
 }
 
